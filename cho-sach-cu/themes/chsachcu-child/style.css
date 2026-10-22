@@ -1,0 +1,1704 @@
+/*
+ Theme Name:   Chợ Sách Cũ Child
+ Theme URI:    http://chosachcu.vn
+ Description:  Child theme for Chợ Sách Cũ - Modern, warm, book-friendly design
+ Author:       Chợ Sách Cũ
+ Author URI:   http://chosachcu.vn
+ Template:     storefront
+ Version:      1.0.0
+ Text Domain:  chsachcu-child
+*/
+
+/* ============================================
+   1. CSS VARIABLES - Bảng màu & Typography
+   ============================================ */
+:root {
+    /* Màu chính - Nâu ấm */
+    --csc-primary: #8B4513;
+    --csc-primary-light: #A0522D;
+    --csc-primary-dark: #5D2E0C;
+    
+    /* Màu phụ - Kem nhạt */
+    --csc-secondary: #F5F0E8;
+    --csc-secondary-dark: #E8DFD0;
+    
+    /* Accent - Cam đất */
+    --csc-accent: #D2691E;
+    --csc-accent-light: #E67E22;
+    
+    /* Nền */
+    --csc-bg-primary: #FDFBF7;
+    --csc-bg-secondary: #FFFFFF;
+    --csc-bg-card: #FFFFFF;
+    
+    /* Text */
+    --csc-text-primary: #2C2C2C;
+    --csc-text-secondary: #666666;
+    --csc-text-muted: #999999;
+    
+    /* Border & Shadow */
+    --csc-border: #E8E4DE;
+    --csc-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --csc-shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+    --csc-shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+    
+    /* Border Radius */
+    --csc-radius-sm: 8px;
+    --csc-radius-md: 12px;
+    --csc-radius-lg: 16px;
+}
+
+/* ============================================
+   2. BASE - Reset & Body
+   ============================================ */
+body {
+    background-color: var(--csc-bg-primary);
+    color: var(--csc-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--csc-text-primary);
+    font-weight: 600;
+}
+
+/* ============================================
+   3. HEADER - Navigation & Logo
+   ============================================ */
+/* Top bar */
+.storefront-header-cart {
+    background: var(--csc-primary);
+}
+
+/* Main header */
+.site-header {
+    background: var(--csc-bg-secondary);
+    box-shadow: var(--csc-shadow-sm);
+    padding: 15px 0;
+}
+
+.site-title a {
+    color: var(--csc-primary) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    text-decoration: none;
+}
+
+.site-title a::before {
+    content: "📚 ";
+}
+
+/* Navigation menu */
+.main-navigation ul li a {
+    color: var(--csc-text-primary);
+    font-weight: 500;
+    padding: 10px 16px;
+    transition: color 0.2s;
+}
+
+.main-navigation ul li a:hover {
+    color: var(--csc-primary);
+}
+
+/* Primary menu highlight */
+.main-navigation ul.menu > li > a {
+    position: relative;
+}
+
+.main-navigation ul.menu > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--csc-primary);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.main-navigation ul.menu > li:hover > a::after {
+    width: 60%;
+}
+
+/* ============================================
+   4. HERO SECTION - Homepage Banner
+   ============================================ */
+.storefront-hero-section {
+    background: linear-gradient(135deg, var(--csc-secondary) 0%, #fff 100%);
+    padding: 60px 20px;
+    border-radius: var(--csc-radius-lg);
+    margin: 20px;
+    text-align: center;
+}
+
+.storefront-hero-section h1 {
+    font-size: 48px;
+    color: var(--csc-primary);
+    margin-bottom: 10px;
+}
+
+.storefront-hero-section p {
+    font-size: 20px;
+    color: var(--csc-text-secondary);
+}
+
+/* ============================================
+   5. PRODUCT CARD - Grid Items (ENHANCED)
+   ============================================ */
+/* Container - auto-fill grid for more products per row */
+.woocommerce ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    clear: both !important;
+    float: none !important;
+}
+
+/* Product item - enhanced card */
+.woocommerce ul.products li.product {
+    background: var(--csc-bg-card) !important;
+    border-radius: var(--csc-radius-lg) !important;
+    box-shadow: var(--csc-shadow-sm) !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid var(--csc-border) !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: left !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    float: none !important;
+    clear: none !important;
+}
+
+.woocommerce ul.products li.product:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--csc-shadow-lg);
+    border-color: var(--csc-primary);
+}
+
+/* Sale badge */
+.woocommerce ul.products li.product .onsale {
+    background: var(--csc-accent);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    top: 12px;
+    right: 12px;
+    min-width: auto;
+    min-height: auto;
+    margin: 0;
+}
+
+/* Product image container */
+.woocommerce ul.products li.product a img {
+    border-radius: var(--csc-radius-md) var(--csc-radius-md) 0 0;
+    transition: transform 0.4s ease;
+    margin: 0;
+    display: block;
+}
+
+.woocommerce ul.products li.product:hover a img {
+    transform: scale(1.05);
+}
+
+/* Image wrapper */
+.woocommerce ul.products li.product a {
+    display: block;
+    overflow: hidden;
+    background: var(--csc-secondary);
+}
+
+/* Product title */
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--csc-text-primary);
+    padding: 12px 14px 4px;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 42px;
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title:hover {
+    color: var(--csc-primary);
+}
+
+/* Product author */
+.csc-product-author {
+    font-size: 13px;
+    color: var(--csc-text-secondary);
+    padding: 0 14px;
+    margin: 0;
+}
+
+.csc-product-author::before {
+    content: "✍️ ";
+}
+
+/* Price */
+.woocommerce ul.products li.product .price {
+    color: var(--csc-accent);
+    font-size: 20px;
+    font-weight: 700;
+    margin: 8px 14px;
+}
+
+.woocommerce ul.products li.product .price del {
+    color: var(--csc-text-muted);
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 8px;
+}
+
+.woocommerce ul.products li.product .price ins {
+    text-decoration: none;
+}
+
+/* Vendor name */
+.csc-product-vendor {
+    font-size: 12px;
+    color: var(--csc-text-muted);
+    padding: 0 14px;
+    margin: 0;
+}
+
+.csc-product-vendor::before {
+    content: "🏪 ";
+}
+
+/* Add to cart button */
+.woocommerce ul.products li.product .button {
+    background: linear-gradient(135deg, var(--csc-primary) 0%, var(--csc-primary-dark) 100%);
+    color: #fff;
+    border-radius: var(--csc-radius-sm);
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: calc(100% - 28px);
+    margin: 12px 14px;
+    text-align: center;
+    display: block;
+    box-sizing: border-box;
+}
+
+.woocommerce ul.products li.product .button:hover {
+    background: linear-gradient(135deg, var(--csc-primary-light) 0%, var(--csc-primary) 100%);
+    transform: scale(1.02);
+    color: #fff;
+}
+
+/* Action buttons row (compare + wishlist) - side by side */
+.csc-product-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px 14px;
+}
+
+/* ============================================
+   Compare button - HÌNH CHỮ NHẬT BO GÓC NÂU
+   ============================================ */
+.csc-add-compare,
+.csc-add-compare-product {
+    background: #8B4513 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #fff !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 !important;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+.csc-add-compare::before {
+    content: none;
+}
+
+/* Ẩn ảnh emoji mặc định của WP - dùng icon FontAwesome thay thế */
+.csc-add-compare img.emoji,
+.csc-add-compare-product img.emoji {
+    display: none !important;
+}
+
+.csc-add-compare .csc-compare-icon,
+.csc-add-compare-product .csc-compare-icon {
+    font-size: 14px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+.csc-add-compare:hover,
+.csc-add-compare-product:hover {
+    background: #A0522D !important;
+    transform: translateY(-1px);
+}
+
+.csc-add-compare.is-added,
+.csc-add-compare-product.is-added {
+    background: #28a745 !important;
+}
+
+/* ============================================
+   Wishlist button - HÌNH TRÒN, VIỀN NÂU, CHỈ ICON TRÁI TIM
+   ============================================ */
+.csc-wishlist-btn,
+a.csc-wishlist-btn,
+.wishlist-btn,
+.wishlist-btn.button {
+    /* Không màu nền — chỉ viền nâu */
+    background: transparent !important;
+    border: 1.5px solid #8B4513 !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+    overflow: visible !important;
+    vertical-align: middle !important;
+    font-size: 13px !important;
+    color: #8B4513 !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    line-height: 1;
+    flex-shrink: 0 !important;
+}
+
+/* Ẩn chữ "Yêu thích" - chỉ giữ icon trái tim */
+.csc-wishlist-btn span,
+a.csc-wishlist-btn span,
+.wishlist-btn span {
+    display: none !important;
+}
+
+/* Trái tim outline (far) - chưa bấm thích */
+.csc-wishlist-btn .far,
+.wishlist-btn .far {
+    font-size: 15px !important;
+    color: #8B4513 !important;
+    transition: color 0.2s ease !important;
+}
+
+/* Trái tim solid (fas) - đã bấm thích */
+.csc-wishlist-btn .fas,
+.wishlist-btn .fas {
+    font-size: 15px !important;
+    color: #8B4513 !important;
+    transition: color 0.2s ease !important;
+}
+
+.csc-wishlist-btn:hover,
+a.csc-wishlist-btn:hover,
+.wishlist-btn:hover,
+.wishlist-btn.button:hover {
+    background: rgba(139, 69, 19, 0.06) !important;
+    border-color: #A0522D !important;
+    color: #A0522D !important;
+    transform: translateY(-1px);
+}
+
+/* Khi bấm thích: trái tim chuyển nâu đậm, nền nhạt */
+.csc-wishlist-btn.active,
+.csc-wishlist-btn.is-added,
+.csc-wishlist-btn.is-active,
+a.csc-wishlist-btn.active,
+.wishlist-btn.is-added,
+.wishlist-btn.button.is-added {
+    background: rgba(139, 69, 19, 0.1) !important;
+    border-color: #8B4513 !important;
+    color: #8B4513 !important;
+}
+
+.csc-wishlist-btn.active .fa-heart,
+.csc-wishlist-btn.is-added .fa-heart,
+.csc-wishlist-btn.is-active .fa-heart,
+a.csc-wishlist-btn.active .fa-heart,
+.wishlist-btn.is-added .fa-heart,
+.wishlist-btn.button.is-added .fa-heart {
+    color: #8B4513 !important;
+}
+
+.csc-wishlist-btn.active .far,
+a.csc-wishlist-btn.active .far,
+.wishlist-btn.is-added .far {
+    color: #8B4513 !important;
+}
+
+/* Nút yêu thích trang chi tiết sản phẩm - giữ chữ, dạng pill */
+.csc-wishlist-btn.csc-wishlist-btn-single {
+    width: auto !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    gap: 6px;
+    line-height: 1.4;
+}
+
+.csc-wishlist-btn.csc-wishlist-btn-single span {
+    display: inline !important;
+    font-size: 13px !important;
+    color: #8B4513 !important;
+}
+
+/* ============================================
+   23. NAVIGATION MENU - HIỂN THỊ ĐẦY ĐỦ
+   ============================================ */
+/* Hiển thị TẤT CẢ menu items - KHÔNG ẨN */
+.storefront-primary-navigation ul.nav-menu > li,
+.storefront-primary-navigation ul.menu > li,
+.main-navigation .nav-menu > li,
+.main-navigation ul.menu > li,
+.primary-navigation .nav-menu > li,
+.site-navigation .nav-menu > li,
+.site-navigation ul.menu > li,
+.desktop-navigation .nav-menu > li {
+    display: inline-flex !important;
+    visibility: visible !important;
+}
+
+/* KHÔNG ẩn bất kỳ menu item nào */
+.storefront-primary-navigation ul.nav-menu > li[class*="tong-quan"],
+.storefront-primary-navigation ul.nav-menu > li[class*="chinh-sach"],
+.storefront-primary-navigation ul.nav-menu > li[class*="dang-ky"],
+.storefront-primary-navigation ul.nav-menu > li[class*="dieu-khoan"],
+.storefront-primary-navigation ul.nav-menu > li[class*="gio-hang"],
+.storefront-primary-navigation ul.nav-menu > li[class*="gioi-thieu"],
+.storefront-primary-navigation ul.nav-menu > li[class*="kenh-nguoi-ban"],
+.storefront-primary-navigation ul.nav-menu > li[class*="kien-bang"],
+.storefront-primary-navigation ul.nav-menu > li[class*="dashboard"],
+.storefront-primary-navigation ul.nav-menu > li[class*="thong-tin-nguoi-ban"],
+.storefront-primary-navigation ul.nav-menu > li[class*="thong-ke"],
+.storefront-primary-navigation ul.nav-menu > li[class*="store-list"],
+.storefront-primary-navigation ul.nav-menu > li[class*="vendor"],
+.main-navigation .nav-menu > li[class*="dashboard"],
+.main-navigation .nav-menu > li[class*="kenh-nguoi-ban"],
+.main-navigation .nav-menu > li[class*="store-list"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+}
+
+/* ============================================
+   24. CART BADGE - ĐÈ LÊN GÓC PHẢI
+   ============================================ */
+.storefront-header-cart .cart-contents,
+.site-header-cart .cart-contents,
+a.cart-contents,
+.site-header-cart .cart-contents {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.storefront-header-cart .cart-contents::after {
+    content: attr(data-count);
+    position: absolute !important;
+    top: -8px !important;
+    right: -8px !important;
+    background: #e74c3c !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 5px !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    z-index: 9999 !important;
+}
+
+/* Hide badge when cart is empty */
+.storefront-header-cart .cart-contents[data-count="0"]::after {
+    display: none !important;
+}
+
+/* Mini cart badge */
+.site-header-cart .cart-contents .count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #e74c3c;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #fff;
+}
+
+/* ============================================
+   24. HIDE EXTRA MENU ITEMS
+   ============================================ */
+/* Hide the second/default menu in navigation */
+.site-navigation .menu:not(.nav-menu),
+.main-navigation .menu:not(.nav-menu) {
+    display: none !important;
+}
+
+/* Show only the nav-menu */
+.site-navigation .nav-menu,
+.main-navigation .nav-menu {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0 18px;
+    align-items: center;
+    /* Storefront collapses .nav-menu with max-height:0 - undo it */
+    max-height: none !important;
+    overflow: visible !important;
+    height: auto !important;
+    visibility: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hide extra menu items - keep only essential */
+.main-navigation .nav-menu > li {
+    display: none !important;
+}
+
+/* Essential menu items to show */
+.main-navigation .nav-menu > li[class*="cua-hang"],
+.main-navigation .nav-menu > li[class*="shop"],
+.main-navigation .nav-menu > li[class*="store"],
+.main-navigation .nav-menu > li[class*="dang-sach"],
+.main-navigation .nav-menu > li[class*="khuyen-mai"],
+.main-navigation .nav-menu > li[class*="my-orders"],
+.main-navigation .nav-menu > li[class*="so-sanh"],
+.main-navigation .nav-menu > li[class*="thanhtoan"],
+.main-navigation .nav-menu > li[class*="tai-khoan"],
+.main-navigation .nav-menu > li.menu-item-object-page {
+    display: inline-flex !important;
+}
+
+/* Specifically hide these menu items */
+.main-navigation .nav-menu > li[class*="tong-quan"],
+.main-navigation .nav-menu > li[class*="chinh-sach"],
+.main-navigation .nav-menu > li[class*="dang-ky"],
+.main-navigation .nav-menu > li[class*="dieu-khoan"],
+.main-navigation .nav-menu > li[class*="gio-hang"],
+.main-navigation .nav-menu > li[class*="gioi-thieu"],
+.main-navigation .nav-menu > li[class*="kenh-nguoi-ban"],
+.main-navigation .nav-menu > li[class*="kien-bang"],
+.main-navigation .nav-menu > li[class*="dashboard"],
+.main-navigation .nav-menu > li[class*="thong-tin-nguoi-ban"],
+.main-navigation .nav-menu > li[class*="thongtinnguoiban"],
+.main-navigation .nav-menu > li[class*="thong-ke"],
+.main-navigation .nav-menu > li a[href*="thong-tin-nguoi-ban"],
+.main-navigation .nav-menu > li a[href*="thongtinnguoiban"],
+.main-navigation .nav-menu > li.menu-item-99 {
+    display: inline-flex !important;
+}
+
+/* Override ALL hide rules - Show ALL menu items */
+.main-navigation .nav-menu > li {
+    display: inline-flex !important;
+    visibility: visible !important;
+}
+
+/* ============================================
+   25. FORCE ALL MENU ITEMS VISIBLE
+   ============================================ */
+/* Remove ALL display:none rules for navigation menu items */
+.storefront-primary-navigation ul.nav-menu > li,
+.storefront-primary-navigation ul.menu > li,
+.main-navigation ul.nav-menu > li,
+.main-navigation ul.menu > li,
+.primary-navigation ul.nav-menu > li,
+.site-navigation ul.nav-menu > li,
+.site-navigation ul.menu > li {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Cart badge - ĐÈ LÊN GÓC PHẢI logo giỏ hàng */
+.csc-cart-badge {
+    position: absolute !important;
+    top: -6px !important;
+    right: -8px !important;
+    background: #e74c3c !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 5px !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+    z-index: 9999 !important;
+    line-height: 1 !important;
+}
+
+@keyframes cscPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Ensure cart link has position relative */
+.cart-contents,
+.site-header-cart .cart-contents,
+a.cart-contents[href*="gio-hang"] {
+    position: relative !important;
+}
+
+/* ============================================
+   6. SINGLE PRODUCT PAGE
+   ============================================ */
+.woocommerce div.product {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    padding: 30px;
+    box-shadow: var(--csc-shadow-sm);
+}
+
+.woocommerce div.product .product_title {
+    font-size: 32px;
+    color: var(--csc-text-primary);
+    margin-bottom: 15px;
+}
+
+.woocommerce div.product p.price {
+    color: var(--csc-accent);
+    font-size: 28px;
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+.woocommerce div.product .woocommerce-product-details__short-description {
+    color: var(--csc-text-secondary);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.woocommerce div.product form.cart .button {
+    background: linear-gradient(135deg, var(--csc-primary) 0%, var(--csc-primary-dark) 100%);
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--csc-radius-md);
+    transition: all 0.3s ease;
+}
+
+.woocommerce div.product form.cart .button:hover {
+    background: linear-gradient(135deg, var(--csc-primary-light) 0%, var(--csc-primary) 100%);
+    transform: scale(1.02);
+}
+
+/* Tabs */
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    color: var(--csc-text-secondary);
+    font-weight: 500;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    color: var(--csc-primary);
+    border-color: var(--csc-primary);
+}
+
+/* ============================================
+   7. PRODUCT SUGGESTIONS - Related Products
+   ============================================ */
+.csc-product-suggestions {
+    margin: 40px 0;
+    padding: 24px;
+    background: var(--csc-secondary);
+    border-radius: var(--csc-radius-lg);
+}
+
+.csc-product-suggestions .suggestions-title {
+    font-size: 22px;
+    color: var(--csc-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--csc-primary);
+}
+
+.csc-product-suggestions .suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+/* ============================================
+   8. SHOPPING CART
+   ============================================ */
+.woocommerce-cart table.cart {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--csc-shadow-sm);
+}
+
+.woocommerce-cart table.cart th {
+    background: var(--csc-secondary);
+    color: var(--csc-text-primary);
+    font-weight: 600;
+    padding: 16px;
+}
+
+.woocommerce-cart table.cart td {
+    padding: 16px;
+    border-bottom: 1px solid var(--csc-border);
+}
+
+.woocommerce-cart table.cart .product-name a {
+    color: var(--csc-text-primary);
+    font-weight: 500;
+}
+
+.woocommerce-cart table.cart .product-name a:hover {
+    color: var(--csc-primary);
+}
+
+.woocommerce-cart table.cart .button {
+    background: var(--csc-primary);
+    color: #fff;
+    border-radius: var(--csc-radius-sm);
+}
+
+.woocommerce-cart table.cart .button:hover {
+    background: var(--csc-primary-dark);
+}
+
+/* Cart totals */
+.woocommerce-cart .cart-collaterals .cart_totals {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    padding: 24px;
+    box-shadow: var(--csc-shadow-sm);
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals h2 {
+    color: var(--csc-primary);
+    font-size: 20px;
+}
+
+.woocommerce-cart .cart-collaterals .wc-proceed-to-checkout .checkout-button {
+    background: linear-gradient(135deg, var(--csc-accent) 0%, var(--csc-accent-light) 100%);
+    border-radius: var(--csc-radius-md);
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.woocommerce-cart .cart-collaterals .wc-proceed-to-checkout .checkout-button:hover {
+    background: linear-gradient(135deg, var(--csc-accent-light) 0%, var(--csc-accent) 100%);
+}
+
+/* ============================================
+   9. CHECKOUT PAGE
+   ============================================ */
+.woocommerce-checkout #payment {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    padding: 24px;
+}
+
+.woocommerce-checkout #payment ul.payment_methods {
+    border-bottom: 2px solid var(--csc-secondary);
+}
+
+.woocommerce-checkout #payment div.place-order {
+    background: var(--csc-secondary);
+    padding: 20px;
+    border-radius: var(--csc-radius-md);
+}
+
+.woocommerce-checkout #payment button#place_order {
+    background: linear-gradient(135deg, var(--csc-accent) 0%, var(--csc-accent-light) 100%);
+    border-radius: var(--csc-radius-md);
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ============================================
+   10. COMPARE PAGE
+   ============================================ */
+.csc-compare-container {
+    margin: 30px 0;
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    padding: 30px;
+    box-shadow: var(--csc-shadow-md);
+}
+
+.csc-compare-container h3 {
+    font-size: 24px;
+    color: var(--csc-primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--csc-primary);
+}
+
+.csc-compare-empty {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--csc-secondary);
+    border-radius: var(--csc-radius-lg);
+    color: var(--csc-text-secondary);
+}
+
+.csc-compare-empty p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--csc-radius-md);
+    overflow: hidden;
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--csc-border);
+    vertical-align: middle;
+}
+
+.compare-table th.compare-feature-header {
+    background: var(--csc-secondary);
+    text-align: left;
+    font-weight: 600;
+    color: var(--csc-text-primary);
+    width: 160px;
+}
+
+.compare-table th.compare-product-header {
+    background: var(--csc-bg-card);
+}
+
+.compare-table th.compare-product-header a {
+    color: var(--csc-text-primary);
+    text-decoration: none;
+}
+
+.compare-table th.compare-product-header a:hover {
+    color: var(--csc-primary);
+}
+
+.compare-table tr:nth-child(even) td {
+    background: var(--csc-secondary);
+}
+
+.compare-table td:first-child {
+    background: var(--csc-secondary) !important;
+    font-weight: 600;
+    text-align: left;
+}
+
+.remove-compare {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    transition: all 0.2s;
+}
+
+.remove-compare:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+.compare-add-cart {
+    background: var(--csc-primary);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--csc-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.compare-add-cart:hover {
+    background: var(--csc-primary-dark);
+}
+
+.compare-clear-all {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--csc-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.compare-clear-all:hover {
+    background: #c0392b;
+}
+
+/* Compare badge */
+.csc-compare-count {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: linear-gradient(135deg, var(--csc-primary) 0%, var(--csc-primary-dark) 100%);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.4);
+    z-index: 9999;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.csc-compare-count:hover {
+    background: linear-gradient(135deg, var(--csc-primary-light) 0%, var(--csc-primary) 100%);
+    transform: translateY(-2px);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(139, 69, 19, 0.5);
+}
+
+/* ============================================
+   11. FOOTER
+   ============================================ */
+.site-footer {
+    background: linear-gradient(180deg, var(--csc-text-primary) 0%, #1a1a1a 100%);
+    color: #fff;
+    padding: 60px 0 30px;
+    margin-top: 60px;
+}
+
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.site-footer a {
+    color: rgba(255,255,255,0.8);
+    transition: color 0.2s;
+}
+
+.site-footer a:hover {
+    color: var(--csc-accent);
+}
+
+.site-footer ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer bottom */
+.site-footer .site-info {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    margin-top: 40px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ============================================
+   12. FORMS & BUTTONS
+   ============================================ */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.button {
+    border-radius: var(--csc-radius-sm);
+    transition: all 0.3s ease;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+    border: 1px solid var(--csc-border);
+    border-radius: var(--csc-radius-sm);
+    padding: 12px 16px;
+    transition: all 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--csc-primary);
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+/* ============================================
+   13. POLICY PAGES
+   ============================================ */
+.policy-page {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-lg);
+    box-shadow: var(--csc-shadow-sm);
+}
+
+.policy-page h2 {
+    color: var(--csc-primary);
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--csc-primary);
+}
+
+.policy-page h3 {
+    color: var(--csc-text-primary);
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-left: 12px;
+    border-left: 4px solid var(--csc-accent);
+}
+
+.policy-page table {
+    border-radius: var(--csc-radius-md);
+    overflow: hidden;
+}
+
+.policy-page table th {
+    background: var(--csc-primary);
+    color: #fff;
+    padding: 14px 16px;
+}
+
+.policy-page table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--csc-border);
+}
+
+.policy-page ul {
+    padding-left: 20px;
+}
+
+.policy-page li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* ============================================
+   14. RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .woocommerce ul.products {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .woocommerce ul.products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .woocommerce ul.products li.product .price {
+        font-size: 18px;
+    }
+    
+    .woocommerce ul.products li.product .woocommerce-loop-product__title {
+        font-size: 14px;
+    }
+    
+    .storefront-hero-section h1 {
+        font-size: 32px;
+    }
+    
+    .storefront-hero-section p {
+        font-size: 16px;
+    }
+    
+    .csc-compare-container {
+        padding: 16px;
+    }
+    
+    .compare-table th,
+    .compare-table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .compare-table th.compare-feature-header {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .woocommerce ul.products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .woocommerce ul.products li.product .button {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .csc-product-actions {
+        padding: 0 8px 8px;
+        gap: 6px;
+    }
+}
+
+/* ============================================
+   15. ANIMATIONS & TRANSITIONS
+   ============================================ */
+/* Fade in animation */
+@keyframes cscFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.woocommerce ul.products li.product {
+    animation: cscFadeIn 0.4s ease forwards;
+}
+
+/* Stagger animation for product grid */
+.woocommerce ul.products li.product:nth-child(1) { animation-delay: 0.05s; }
+.woocommerce ul.products li.product:nth-child(2) { animation-delay: 0.1s; }
+.woocommerce ul.products li.product:nth-child(3) { animation-delay: 0.15s; }
+.woocommerce ul.products li.product:nth-child(4) { animation-delay: 0.2s; }
+.woocommerce ul.products li.product:nth-child(5) { animation-delay: 0.25s; }
+.woocommerce ul.products li.product:nth-child(6) { animation-delay: 0.3s; }
+.woocommerce ul.products li.product:nth-child(7) { animation-delay: 0.35s; }
+.woocommerce ul.products li.product:nth-child(8) { animation-delay: 0.4s; }
+
+/* Pulse animation for cart badge */
+@keyframes cscPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.woocommerce-cart .cart-contents .count {
+    animation: cscPulse 0.3s ease;
+}
+
+/* Loading skeleton */
+@keyframes cscShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.csc-skeleton {
+    background: linear-gradient(90deg, var(--csc-secondary) 25%, var(--csc-border) 50%, var(--csc-secondary) 75%);
+    background-size: 200% 100%;
+    animation: cscShimmer 1.5s infinite;
+    border-radius: var(--csc-radius-sm);
+}
+
+/* ============================================
+   16. CUSTOM SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--csc-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--csc-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--csc-primary-dark);
+}
+
+/* ============================================
+   17. LAYOUT - Full Width, Hide ALL Sidebars
+   ============================================ */
+/* Hide ALL sidebars - aggressive approach */
+#secondary,
+aside#secondary,
+.widget-area,
+aside.widget-area,
+.site-content aside,
+.sidebar,
+aside.sidebar,
+[id="secondary"],
+.secondary {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Make content FULL width - 100% */
+.site-content,
+.woocommerce-page .site-content,
+.archive .site-content,
+.home .site-content,
+.single-product .site-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+}
+
+/* Main content area - full width */
+#primary,
+.main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+}
+
+/* WooCommerce content area - full width */
+.woocommerce-page .site-main {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+}
+
+/* Homepage specific */
+.home .site-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Storefront layout override */
+.storefront-full-width-content .site-main {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.storefront-full-width-content #primary {
+    width: 100% !important;
+}
+
+/* Archive page full width */
+.archive .site-main,
+.blog .site-main {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Page template full width */
+.page-template-default #secondary {
+    display: none !important;
+}
+
+.page-template-default .entry-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Fix footer - hide duplicate */
+.site-footer:last-of-type {
+    display: block !important;
+}
+
+.storefront-handheld-footer-bar {
+    display: none !important;
+}
+
+/* Footer only once */
+.site-footer,
+.site-info {
+    display: block !important;
+}
+
+/* Fix double footer - hide second one */
+.site-footer + .site-footer,
+footer.site-footer + footer.site-footer {
+    display: none !important;
+}
+
+/* Remove gap/space between sections */
+.site-main .woocommerce,
+.site-main ul.products,
+.woocommerce ul.products {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Ensure no gap between WooCommerce sections */
+.woocommerce[class*="columns"] {
+    margin: 0 !important;
+}
+
+/* Fix gap between multiple product sections on homepage */
+.home .site-main > .woocommerce,
+.home .site-main > div:not(.widget-area) {
+    margin-bottom: 0 !important;
+}
+
+/* Remove empty spacing */
+.entry-content .woocommerce {
+    margin-bottom: 0 !important;
+}
+
+/* Hide handheld footer bar */
+.storefront-handheld-footer-bar {
+    display: none !important;
+}
+
+/* Ensure col-full takes full width */
+.col-full,
+.site-content .col-full {
+    max-width: 1400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+/* ============================================
+   18. HEADER ENHANCEMENTS
+   ============================================ */
+/* Header search bar */
+.storefront-header-cart .site-search {
+    margin-left: 20px;
+}
+
+.storefront-header-cart .site-search .widget_product_search form {
+    position: relative;
+}
+
+.storefront-header-cart .site-search input[type="search"] {
+    width: 250px;
+    padding: 10px 40px 10px 16px;
+    border-radius: 25px;
+    border: 2px solid var(--csc-border);
+}
+
+.storefront-header-cart .site-search input[type="search"]:focus {
+    border-color: var(--csc-primary);
+}
+
+/* Cart icon */
+.storefront-header-cart .cart-contents {
+    position: relative;
+}
+
+.storefront-header-cart .cart-contents .count {
+    background: var(--csc-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+}
+
+/* ============================================
+   19. STOREFRONT OVERRIDES
+   ============================================ */
+/* Remove Storefront default borders */
+.storefront-header-cart {
+    border: none;
+}
+
+/* Better product spacing */
+.woocommerce ul.products {
+    clear: both;
+    padding: 20px 0;
+}
+
+/* Quick sale badge adjustment */
+.woocommerce span.onsale {
+    background: var(--csc-accent);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ============================================
+   20. ADDITIONAL POLISH
+   ============================================ */
+/* Focus states */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--csc-primary);
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+    background: var(--csc-primary);
+    color: #fff;
+}
+
+/* WooCommerce message boxes */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+    border-radius: var(--csc-radius-md);
+    border-top-color: var(--csc-primary);
+}
+
+.woocommerce-message {
+    background: #d4edda;
+    border-top-color: #28a745;
+}
+
+.woocommerce-error {
+    background: #f8d7da;
+    border-top-color: #dc3545;
+}
+
+/* Account pages */
+.woocommerce-account .woocommerce-MyAccount-navigation {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-md);
+    padding: 20px;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: var(--csc-radius-sm);
+    color: var(--csc-text-primary);
+    transition: all 0.2s;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a:hover,
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a {
+    background: var(--csc-primary);
+    color: #fff;
+}
+
+/* My Orders custom page */
+.csc-my-orders h1 {
+    color: var(--csc-primary);
+    margin-bottom: 20px;
+}
+
+.csc-my-orders .order-card {
+    background: var(--csc-bg-card);
+    border-radius: var(--csc-radius-md);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--csc-shadow-sm);
+    border-left: 4px solid var(--csc-primary);
+    transition: all 0.2s;
+}
+
+.csc-my-orders .order-card:hover {
+    box-shadow: var(--csc-shadow-md);
+    transform: translateX(4px);
+}
+
+/* Order status badges */
+.csc-order-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.csc-order-status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.csc-order-status.processing {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.csc-order-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.csc-order-status.cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* ============================================
+   21. PAGINATION - GỌN GÀNG
+   ============================================ */
+.woocommerce-pagination {
+    margin: 30px 0;
+    text-align: center;
+    clear: both;
+}
+
+.woocommerce-pagination ul.page-numbers {
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    flex-wrap: nowrap !important;
+}
+
+.woocommerce-pagination li {
+    display: inline-flex !important;
+    list-style: none !important;
+}
+
+.woocommerce-pagination li .page-numbers {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 6px 12px;
+    background: var(--csc-bg-card);
+    border: 1px solid var(--csc-border);
+    border-radius: 6px;
+    color: var(--csc-text-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin: 0 2px;
+}
+
+.woocommerce-pagination li .page-numbers:hover {
+    background: var(--csc-primary);
+    color: #fff;
+    border-color: var(--csc-primary);
+}
+
+.woocommerce-pagination li .page-numbers.current {
+    background: var(--csc-primary);
+    color: #fff;
+    border-color: var(--csc-primary);
+    font-weight: 600;
+}
+
+.woocommerce-pagination .prev,
+.woocommerce-pagination .next {
+    padding: 6px 14px;
+}
+
+/* ============================================
+   22. PRODUCT GRID - FIX EMPTY SLOT
+   ============================================ */
+.woocommerce ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    clear: both !important;
+    float: none !important;
+    justify-items: stretch !important;
+    align-items: stretch !important;
+}
+
+.woocommerce ul.products::before,
+.woocommerce ul.products::after {
+    display: none !important;
+}
+
+.woocommerce ul.products li.product {
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    clear: none !important;
+}

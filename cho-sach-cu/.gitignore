@@ -1,0 +1,10 @@
+.env
+backups/*.sql
+backups/*.sql.gz
+backups/*.tar
+backups/*.tar.gz
+backups/*.zip
+*.log
+*.bak
+*.bak2
+.DS_Store

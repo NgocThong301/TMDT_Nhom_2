@@ -1,0 +1,103 @@
+# Dự án độc lập: cho-sach-cu
+# Không dùng chung network/volume/database với 01-cua-hang (Bút Chì Xanh) hay buoi11.
+name: cho-sach-cu
+
+services:
+  db:
+    image: mysql:8.0.40
+    container_name: cho-sach-cu-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - cho_sach_cu_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    networks:
+      - cho_sach_cu_net
+    # Cổng MySQL không publish ra máy host.
+
+  wordpress:
+    image: wordpress:7.1.3-php8.2-apache
+    container_name: cho-sach-cu-wordpress
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_HOST_PORT}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_HOME', '${WP_URL}');
+        define('WP_SITEURL', '${WP_URL}');
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - cho_sach_cu_wp_data:/var/www/html
+      - ./scripts:/opt/cho-sach-cu:ro
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:rw
+    healthcheck:
+      test: ["CMD-SHELL", "php -r \"exit(@fsockopen('127.0.0.1', 80) ? 0 : 1);\""]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    networks:
+      - cho_sach_cu_net
+
+  wpcli:
+    image: wordpress:cli-2.12.0-php8.2
+    container_name: cho-sach-cu-wpcli
+    profiles: ["setup"]
+    depends_on:
+      db:
+        condition: service_healthy
+      wordpress:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WP_URL: ${WP_URL}
+      WP_ADMIN_USER: ${WP_ADMIN_USER}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      VENDOR1_PASSWORD: ${VENDOR1_PASSWORD}
+      VENDOR2_PASSWORD: ${VENDOR2_PASSWORD}
+      VENDOR3_PASSWORD: ${VENDOR3_PASSWORD}
+      BUYER_PASSWORD: ${BUYER_PASSWORD}
+      VNPAY_TMN_CODE: ${VNPAY_TMN_CODE:-}
+      VNPAY_HASH_SECRET: ${VNPAY_HASH_SECRET:-}
+      VNPAY_RETURN_URL: ${VNPAY_RETURN_URL:-}
+      HOME: /tmp
+    user: "33:33"
+    working_dir: /var/www/html
+    volumes:
+      - cho_sach_cu_wp_data:/var/www/html
+      - ./scripts:/opt/cho-sach-cu:ro
+    entrypoint: ["sh", "/opt/cho-sach-cu/setup.sh"]
+    networks:
+      - cho_sach_cu_net
+
+volumes:
+  cho_sach_cu_db_data:
+    name: cho-sach-cu_db_data
+  cho_sach_cu_wp_data:
+    name: cho-sach-cu_wp_data
+
+networks:
+  cho_sach_cu_net:
+    name: cho-sach-cu_net
+    driver: bridge

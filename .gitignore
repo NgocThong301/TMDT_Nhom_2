@@ -1,0 +1,10 @@
+cho-sach-cu/.env
+cho-sach-cu/backups/*.sql
+cho-sach-cu/backups/*.sql.gz
+cho-sach-cu/backups/*.tar
+cho-sach-cu/backups/*.tar.gz
+cho-sach-cu/backups/*.zip
+cho-sach-cu/*.log
+cho-sach-cu/*.bak
+cho-sach-cu/*.bak2
+.DS_Store
